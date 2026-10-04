@@ -1,0 +1,181 @@
+[
+  {
+    "id": "top",
+    "label": { "en": "Top Stories", "hi": "मुख्य ख़बरें" },
+    "icon": "flame",
+    "color": "#FF6B35",
+    "gradient": "from-amber-700/40 to-orange-950/70",
+    "keywords": { "en": [], "hi": [] }
+  },
+  {
+    "id": "politics",
+    "label": { "en": "Politics", "hi": "राजनीति" },
+    "icon": "landmark",
+    "color": "#4D7CFE",
+    "gradient": "from-blue-700/40 to-indigo-950/70",
+    "keywords": {
+      "en": [
+        "election", "minister", "parliament", "assembly", "bjp", "congress", "aap", "lok sabha", "rajya sabha",
+        "chief minister", "opposition", "poll", "modi", "gandhi", "bjp-led", "coalition", "legislation", "cabinet",
+        "prime minister", "governor", "ordinance", "ballot", "voting", "campaign", "manifesto", "constituency", "mla", "mp"
+      ],
+      "hi": [
+        "चुनाव", "मंत्री", "संसद", "विधानसभा", "भाजपा", "कांग्रेस", "मुख्यमंत्री", "विपक्ष", "लोकसभा", "राज्यसभा",
+        "मोदी", "राहुल", "गठबंधन", "विधेयक", "मंत्रिमंडल", "प्रधानमंत्री", "राज्यपाल", "मतदान", "प्रचार", "घोषणापत्र",
+        "आप", "केजरीवाल", "सपा", "बसपा", "वोट", "सांसद", "विधायक"
+      ]
+    }
+  },
+  {
+    "id": "protests",
+    "label": { "en": "Protests & Movements", "hi": "प्रदर्शन और आंदोलन" },
+    "icon": "megaphone",
+    "color": "#E63946",
+    "gradient": "from-rose-700/40 to-red-950/70",
+    "keywords": {
+      "en": [
+        "protest", "protesters", "agitation", "strike", "dharna", "bandh", "rally", "march", "blockade",
+        "demonstration", "unrest", "sit-in", "farmers protest", "hunger strike", "boycott", "demonstrators",
+        "activists", "sloganeering", "chakka jam", "morcha", "protesting", "walkout", "clash", "gasp", "tear gas"
+      ],
+      "hi": [
+        "प्रदर्शन", "आंदोलन", "हड़ताल", "धरना", "बंद", "रैली", "घेराव", "विरोध", "किसान आंदोलन", "भूख हड़ताल",
+        "बहिष्कार", "प्रदर्शनकारी", "कार्यकर्ता", "नारेबाजी", "चक्का जाम", "मोर्चा", "धरना-प्रदर्शन", "आक्रोश",
+        "सड़क जाम", "पुतला दहन", "लाठीचार्ज", "आंसू गैस", "मांगें", "प्रदर्शनकारियों"
+      ]
+    }
+  },
+  {
+    "id": "sports",
+    "label": { "en": "Sports", "hi": "खेल" },
+    "icon": "trophy",
+    "color": "#2A9D8F",
+    "gradient": "from-emerald-700/40 to-teal-950/70",
+    "keywords": {
+      "en": [
+        "cricket", "ipl", "match", "tournament", "olympic", "football", "hockey", "tennis", "wicket", "medal",
+        "bcci", "fifa", "batsman", "bowler", "century", "badminton", "kohli", "rohit", "championship", "world cup",
+        "athlete", "kabaddi", "grand slam", "score", "wicketkeeper", "all-rounder"
+      ],
+      "hi": [
+        "क्रिकेट", "आईपीएल", "मैच", "टूर्नामेंट", "ओलंपिक", "फुटबॉल", "हॉकी", "टेनिस", "पदक", "बीसीसीआई",
+        "फीफा", "बल्लेबाज", "गेंदबाज", "शतक", "बैडमिंटन", "कोहली", "रोहित", "विश्व कप", "खिलाड़ी", "कबड्डी",
+        "रन", "विकेट", "सेमीफाइनल", "फाइनल", "मुकाबला"
+      ]
+    }
+  },
+  {
+    "id": "business",
+    "label": { "en": "Business", "hi": "कारोबार" },
+    "icon": "trending-up",
+    "color": "#F4A261",
+    "gradient": "from-amber-600/40 to-stone-950/70",
+    "keywords": {
+      "en": [
+        "sensex", "nifty", "stock", "rbi", "rupee", "inflation", "gdp", "startup", "ipo", "bank", "tax", "budget",
+        "economy", "market", "shares", "finance", "revenue", "investor", "acquisition", "fintech", "export", "import",
+        "sebi", "quarterly", "profit", "loss"
+      ],
+      "hi": [
+        "सेंसेक्स", "निफ्टी", "शेयर", "आरबीआई", "रुपया", "महंगाई", "जीडीपी", "बजट", "टैक्स", "अर्थव्यवस्था",
+        "बाजार", "बैंक", "स्टार्टअप", "आईपीओ", "मुनाफा", "घाटा", "निवेश", "राजस्व", "वित्तीय", "कारोबार",
+        "दाम", "सोना", "चांदी", "ब्याज दर", "कंपनी"
+      ]
+    }
+  },
+  {
+    "id": "tech",
+    "label": { "en": "Technology", "hi": "तकनीक" },
+    "icon": "cpu",
+    "color": "#7209B7",
+    "gradient": "from-purple-700/40 to-violet-950/70",
+    "keywords": {
+      "en": [
+        "ai", "artificial intelligence", "smartphone", "app", "software", "cyber", "isro", "satellite", "chip",
+        "google", "apple", "microsoft", "robot", "semiconductor", "gadget", "cybersecurity", "nasa", "chandrayaan",
+        "algorithm", "broadband", "5g", "telecom", "data privacy", "cloud", "tech"
+      ],
+      "hi": [
+        "तकनीक", "स्मार्टफोन", "इसरो", "साइबर", "ऐप", "सैटेलाइट", "गूगल", "एआई", "सॉफ्टवेयर", "इंटरनेट",
+        "एप्पल", "माइक्रोसॉफ्ट", "चंद्रयान", "रोबोट", "गैजेट", "सुरक्षा", "डेटा", "क्लाउड", "टेलीकॉम", "फाइवजी",
+        "कृत्रिम बुद्धिमत्ता", "उपग्रह", "चिप", "हैक"
+      ]
+    }
+  },
+  {
+    "id": "entertainment",
+    "label": { "en": "Celebrities & Entertainment", "hi": "मनोरंजन और सितारे" },
+    "icon": "film",
+    "color": "#D81159",
+    "gradient": "from-pink-700/40 to-fuchsia-950/70",
+    "keywords": {
+      "en": [
+        "bollywood", "actor", "actress", "film", "movie", "box office", "trailer", "singer", "web series", "ott",
+        "celebrity", "wedding", "cinema", "hollywood", "director", "song", "album", "premiere", "star", "acting",
+        "teaser", "oscar", "filmfare", "screenplay", "superstar"
+      ],
+      "hi": [
+        "बॉलीवुड", "अभिनेता", "अभिनेत्री", "फिल्म", "ट्रेलर", "गायक", "वेब सीरीज़", "सितारे", "सिनेमा", "मूवी",
+        "बॉक्स ऑफिस", "ओटीटी", "गाना", "निर्देशक", "सुपरस्टार", "अवार्ड", "टीज़र", "कलाकार", "शादी", "संगीत",
+        "नाट्य", "अभिनय", "हॉलीवुड", "सेलिब्रिटी"
+      ]
+    }
+  },
+  {
+    "id": "crime",
+    "label": { "en": "Crime & Law", "hi": "अपराध और क़ानून" },
+    "icon": "shield-alert",
+    "color": "#9D0208",
+    "gradient": "from-red-800/40 to-zinc-950/80",
+    "keywords": {
+      "en": [
+        "arrested", "murder", "police", "court", "fir", "robbery", "scam", "fraud", "verdict", "bail", "high court",
+        "supreme court", "cbi", "ed", "investigation", "crime", "custody", "convicted", "smuggling", "encounter",
+        "accused", "probe", "hearing", "charge sheet"
+      ],
+      "hi": [
+        "गिरफ्तार", "हत्या", "पुलिस", "अदालत", "एफआईआर", "लूट", "घोटाला", "धोखाधड़ी", "ज़मानत", "सुप्रीम कोर्ट",
+        "हाई कोर्ट", "सीबीआई", "ईडी", "हिरासत", "अपराध", "दोषी", "तस्करी", "मुठभेड़", "आरोपी", "जांच",
+        "सुनवाई", "वारंट", "चार्जशीट"
+      ]
+    }
+  },
+  {
+    "id": "health",
+    "label": { "en": "Health", "hi": "स्वास्थ्य" },
+    "icon": "heart-pulse",
+    "color": "#06D6A0",
+    "gradient": "from-teal-700/40 to-slate-950/70",
+    "keywords": {
+      "en": [
+        "hospital", "disease", "vaccine", "covid", "doctor", "health", "dengue", "cancer", "medicine", "aiims",
+        "infection", "surgery", "patient", "virus", "medical", "treatment", "therapy", "clinical", "nutrition",
+        "fitness", "mental health", "cardiac", "epidemic", "outbreak"
+      ],
+      "hi": [
+        "अस्पताल", "बीमारी", "टीका", "डॉक्टर", "स्वास्थ्य", "डेंगू", "कैंसर", "दवा", "एम्स", "संक्रमण",
+        "इलाज", "मरीज", "वायरस", "चिकित्सा", "रोग", "टीकाकरण", "महामारी", "स्वास्थ्यकर्मी", "सर्जरी", "दवाइयां",
+        "पोषण", "मानसिक स्वास्थ्य"
+      ]
+    }
+  },
+  {
+    "id": "world",
+    "label": { "en": "World", "hi": "दुनिया" },
+    "icon": "globe",
+    "color": "#3A86FF",
+    "gradient": "from-sky-700/40 to-slate-950/80",
+    "keywords": {
+      "en": [
+        "un", "united nations", "china", "pakistan", "usa", "russia", "ukraine", "gaza", "europe", "global",
+        "summit", "biden", "trump", "putin", "middle east", "ceasefire", "diplomacy", "embassy", "treaty",
+        "international", "nato", "israel", "iran", "foreign policy"
+      ],
+      "hi": [
+        "संयुक्त राष्ट्र", "चीन", "पाकिस्तान", "अमेरिका", "रूस", "यूक्रेन", "गाज़ा", "यूरोप", "वैश्विक", "शिखर सम्मेलन",
+        "पुतिन", "बाइडन", "ट्रम्प", "इजरायल", "ईरान", "युद्ध", "सीजफायर", "अंतरराष्ट्रीय", "राजनयिक", "विदेश नीति",
+        "समझौता", "नाटो", "कूटनीति"
+      ]
+    }
+  }
+]

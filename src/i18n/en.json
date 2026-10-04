@@ -1,0 +1,94 @@
+{
+  "app": {
+    "name": "Awaaz",
+    "tagline": "Calm, listenable news"
+  },
+  "nav": {
+    "forYou": "For you",
+    "playBriefing": "Play briefing",
+    "stopBriefing": "Stop briefing",
+    "searchPlaceholder": "Search stories, topics, cities…",
+    "openSettings": "Preferences & Settings",
+    "themeToggle": "Toggle theme"
+  },
+  "onboarding": {
+    "step": "Step {current} of {total}",
+    "step1Title": "Which country's news do you want?",
+    "step1Desc": "Select your primary news region.",
+    "step2Title": "In which language should I narrate?",
+    "step2Desc": "Awaaz will present stories and narrate them in your chosen language.",
+    "step3Title": "What do you want to hear about?",
+    "step3Desc": "Pick 1 to 6 topics that matter most to you.",
+    "step4Title": "Any city or region you care about?",
+    "step4Desc": "We'll spotlight local headlines from this area.",
+    "step5Title": "What are you really looking for?",
+    "step5Desc": "Optional keywords or specific topics you want to track.",
+    "step5Placeholder": "e.g. farmers protest, IPL, Shah Rukh Khan, ISRO",
+    "comingSoon": "Coming soon",
+    "back": "Back",
+    "next": "Next",
+    "finish": "Start listening",
+    "skip": "Skip for now",
+    "preparing": "Preparing your personalized news feed…",
+    "selectAtLeastOne": "Please choose at least 1 category.",
+    "selectAtMostSix": "You can choose up to 6 categories."
+  },
+  "grid": {
+    "loading": "Gathering verified stories…",
+    "emptyTitle": "No stories found",
+    "emptyDesc": "Try clearing search keywords or selecting different topics.",
+    "clearSearch": "Clear search",
+    "editPreferences": "Edit preferences",
+    "broaderResults": "Showing broader results for your interests",
+    "newStoriesPill": "{count} new stories, tap to view",
+    "loadMore": "Loading more stories…",
+    "noMore": "You are completely caught up."
+  },
+  "card": {
+    "openStory": "Open story: {headline}",
+    "readOriginal": "Read original",
+    "minutesAgo": "{mins}m ago",
+    "hoursAgo": "{hours}h ago",
+    "daysAgo": "{days}d ago",
+    "justNow": "Just now",
+    "textCardBadge": "Digest"
+  },
+  "player": {
+    "automatedNarration": "Automated narration",
+    "readFullStory": "Read full story at {source}",
+    "copyrightNotice": "News © {source}. Summary shown for convenience.",
+    "imageTab": "Image",
+    "videoTab": "Video",
+    "videoFrom": "Video: {channel} on YouTube",
+    "speed": "Speed",
+    "previousStory": "Previous story",
+    "nextStory": "Next story",
+    "play": "Play",
+    "pause": "Pause",
+    "stop": "Stop",
+    "close": "Close player",
+    "noHindiVoice": "This device has no Hindi voice installed. Install a Hindi voice in system settings, or read the synced captions below.",
+    "noTtsSupport": "Audio narration is not supported on this browser. You can read the full summary below.",
+    "captions": "Captions",
+    "keyboardShortcuts": "Space: Play/Pause • Esc: Close • Arrows: Next/Prev"
+  },
+  "settings": {
+    "title": "Preferences & Settings",
+    "language": "Narration & Content Language",
+    "categories": "Your Topics",
+    "city": "Focus City",
+    "customQuery": "Tracked Topic Query",
+    "rate": "Default Narration Speed",
+    "autoplayNext": "Auto-advance to next story",
+    "save": "Save preferences",
+    "reset": "Reset everything",
+    "resetConfirm": "Are you sure you want to reset all preferences? This will restart the onboarding wizard.",
+    "aboutTitle": "About Awaaz News",
+    "aboutText": "Awaaz News is a calm, visual, listenable discovery layer for public interest journalism. Headlines, summaries, and images belong entirely to their original publishers. Contact contact@awaaznews.org for removal requests or editorial inquiries."
+  },
+  "common": {
+    "offlineNotice": "You are currently offline. Showing cached stories.",
+    "errorNotice": "Unable to connect to live feeds. Retrying automatically.",
+    "retry": "Retry now"
+  }
+}

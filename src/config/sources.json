@@ -1,0 +1,281 @@
+[
+  {
+    "id": "gnews-top-en",
+    "name": "Google News India",
+    "country": "IN",
+    "language": "en",
+    "feedUrl": "https://news.google.com/rss?hl=en-IN&gl=IN&ceid=IN:en",
+    "homeUrl": "https://news.google.com",
+    "categoryHint": "top"
+  },
+  {
+    "id": "gnews-nation-en",
+    "name": "Google News National",
+    "country": "IN",
+    "language": "en",
+    "feedUrl": "https://news.google.com/rss/headlines/section/topic/NATION?hl=en-IN&gl=IN&ceid=IN:en",
+    "homeUrl": "https://news.google.com",
+    "categoryHint": "politics"
+  },
+  {
+    "id": "gnews-business-en",
+    "name": "Google News Business",
+    "country": "IN",
+    "language": "en",
+    "feedUrl": "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=en-IN&gl=IN&ceid=IN:en",
+    "homeUrl": "https://news.google.com",
+    "categoryHint": "business"
+  },
+  {
+    "id": "gnews-tech-en",
+    "name": "Google News Tech",
+    "country": "IN",
+    "language": "en",
+    "feedUrl": "https://news.google.com/rss/headlines/section/topic/TECHNOLOGY?hl=en-IN&gl=IN&ceid=IN:en",
+    "homeUrl": "https://news.google.com",
+    "categoryHint": "tech"
+  },
+  {
+    "id": "gnews-sports-en",
+    "name": "Google News Sports",
+    "country": "IN",
+    "language": "en",
+    "feedUrl": "https://news.google.com/rss/headlines/section/topic/SPORTS?hl=en-IN&gl=IN&ceid=IN:en",
+    "homeUrl": "https://news.google.com",
+    "categoryHint": "sports"
+  },
+  {
+    "id": "gnews-ent-en",
+    "name": "Google News Entertainment",
+    "country": "IN",
+    "language": "en",
+    "feedUrl": "https://news.google.com/rss/headlines/section/topic/ENTERTAINMENT?hl=en-IN&gl=IN&ceid=IN:en",
+    "homeUrl": "https://news.google.com",
+    "categoryHint": "entertainment"
+  },
+  {
+    "id": "gnews-world-en",
+    "name": "Google News World",
+    "country": "IN",
+    "language": "en",
+    "feedUrl": "https://news.google.com/rss/headlines/section/topic/WORLD?hl=en-IN&gl=IN&ceid=IN:en",
+    "homeUrl": "https://news.google.com",
+    "categoryHint": "world"
+  },
+  {
+    "id": "gnews-science-en",
+    "name": "Google News Science & Health",
+    "country": "IN",
+    "language": "en",
+    "feedUrl": "https://news.google.com/rss/headlines/section/topic/SCIENCE?hl=en-IN&gl=IN&ceid=IN:en",
+    "homeUrl": "https://news.google.com",
+    "categoryHint": "health"
+  },
+  {
+    "id": "toi-top-en",
+    "name": "Times of India",
+    "country": "IN",
+    "language": "en",
+    "feedUrl": "https://timesofindia.indiatimes.com/rssfeedstopstories.cms",
+    "homeUrl": "https://timesofindia.indiatimes.com",
+    "categoryHint": "top"
+  },
+  {
+    "id": "toi-india-en",
+    "name": "Times of India",
+    "country": "IN",
+    "language": "en",
+    "feedUrl": "https://timesofindia.indiatimes.com/rssfeeds/-2128936835.cms",
+    "homeUrl": "https://timesofindia.indiatimes.com",
+    "categoryHint": "politics"
+  },
+  {
+    "id": "toi-business-en",
+    "name": "Times of India Business",
+    "country": "IN",
+    "language": "en",
+    "feedUrl": "https://timesofindia.indiatimes.com/rssfeeds/1898055.cms",
+    "homeUrl": "https://timesofindia.indiatimes.com",
+    "categoryHint": "business"
+  },
+  {
+    "id": "toi-cricket-en",
+    "name": "Times of India Sports",
+    "country": "IN",
+    "language": "en",
+    "feedUrl": "https://timesofindia.indiatimes.com/rssfeeds/54829575.cms",
+    "homeUrl": "https://timesofindia.indiatimes.com",
+    "categoryHint": "sports"
+  },
+  {
+    "id": "thehindu-national-en",
+    "name": "The Hindu",
+    "country": "IN",
+    "language": "en",
+    "feedUrl": "https://www.thehindu.com/news/national/feeder/default.rss",
+    "homeUrl": "https://www.thehindu.com",
+    "categoryHint": "politics"
+  },
+  {
+    "id": "thehindu-sport-en",
+    "name": "The Hindu",
+    "country": "IN",
+    "language": "en",
+    "feedUrl": "https://www.thehindu.com/sport/feeder/default.rss",
+    "homeUrl": "https://www.thehindu.com",
+    "categoryHint": "sports"
+  },
+  {
+    "id": "thehindu-business-en",
+    "name": "The Hindu",
+    "country": "IN",
+    "language": "en",
+    "feedUrl": "https://www.thehindu.com/business/feeder/default.rss",
+    "homeUrl": "https://www.thehindu.com",
+    "categoryHint": "business"
+  },
+  {
+    "id": "thehindu-entertainment-en",
+    "name": "The Hindu",
+    "country": "IN",
+    "language": "en",
+    "feedUrl": "https://www.thehindu.com/entertainment/feeder/default.rss",
+    "homeUrl": "https://www.thehindu.com",
+    "categoryHint": "entertainment"
+  },
+  {
+    "id": "thehindu-world-en",
+    "name": "The Hindu",
+    "country": "IN",
+    "language": "en",
+    "feedUrl": "https://www.thehindu.com/news/international/feeder/default.rss",
+    "homeUrl": "https://www.thehindu.com",
+    "categoryHint": "world"
+  },
+  {
+    "id": "ndtv-top-en",
+    "name": "NDTV",
+    "country": "IN",
+    "language": "en",
+    "feedUrl": "https://feeds.feedburner.com/ndtvnews-top-stories",
+    "homeUrl": "https://www.ndtv.com",
+    "categoryHint": "top"
+  },
+  {
+    "id": "indianexpress-en",
+    "name": "Indian Express",
+    "country": "IN",
+    "language": "en",
+    "feedUrl": "https://indianexpress.com/section/india/feed/",
+    "homeUrl": "https://indianexpress.com",
+    "categoryHint": "politics"
+  },
+  {
+    "id": "bbc-world-en",
+    "name": "BBC News",
+    "country": "IN",
+    "language": "en",
+    "feedUrl": "https://feeds.bbci.co.uk/news/world/rss.xml",
+    "homeUrl": "https://www.bbc.com/news",
+    "categoryHint": "world"
+  },
+  {
+    "id": "gnews-top-hi",
+    "name": "गूगल समाचार हिन्दी",
+    "country": "IN",
+    "language": "hi",
+    "feedUrl": "https://news.google.com/rss?hl=hi&gl=IN&ceid=IN:hi",
+    "homeUrl": "https://news.google.com",
+    "categoryHint": "top"
+  },
+  {
+    "id": "gnews-nation-hi",
+    "name": "गूगल समाचार भारत",
+    "country": "IN",
+    "language": "hi",
+    "feedUrl": "https://news.google.com/rss/headlines/section/topic/NATION?hl=hi&gl=IN&ceid=IN:hi",
+    "homeUrl": "https://news.google.com",
+    "categoryHint": "politics"
+  },
+  {
+    "id": "gnews-business-hi",
+    "name": "गूगल समाचार व्यापार",
+    "country": "IN",
+    "language": "hi",
+    "feedUrl": "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=hi&gl=IN&ceid=IN:hi",
+    "homeUrl": "https://news.google.com",
+    "categoryHint": "business"
+  },
+  {
+    "id": "gnews-sports-hi",
+    "name": "गूगल समाचार खेल",
+    "country": "IN",
+    "language": "hi",
+    "feedUrl": "https://news.google.com/rss/headlines/section/topic/SPORTS?hl=hi&gl=IN&ceid=IN:hi",
+    "homeUrl": "https://news.google.com",
+    "categoryHint": "sports"
+  },
+  {
+    "id": "gnews-ent-hi",
+    "name": "गूगल समाचार मनोरंजन",
+    "country": "IN",
+    "language": "hi",
+    "feedUrl": "https://news.google.com/rss/headlines/section/topic/ENTERTAINMENT?hl=hi&gl=IN&ceid=IN:hi",
+    "homeUrl": "https://news.google.com",
+    "categoryHint": "entertainment"
+  },
+  {
+    "id": "gnews-tech-hi",
+    "name": "गूगल समाचार तकनीक",
+    "country": "IN",
+    "language": "hi",
+    "feedUrl": "https://news.google.com/rss/headlines/section/topic/TECHNOLOGY?hl=hi&gl=IN&ceid=IN:hi",
+    "homeUrl": "https://news.google.com",
+    "categoryHint": "tech"
+  },
+  {
+    "id": "gnews-world-hi",
+    "name": "गूगल समाचार दुनिया",
+    "country": "IN",
+    "language": "hi",
+    "feedUrl": "https://news.google.com/rss/headlines/section/topic/WORLD?hl=hi&gl=IN&ceid=IN:hi",
+    "homeUrl": "https://news.google.com",
+    "categoryHint": "world"
+  },
+  {
+    "id": "bbc-hindi-hi",
+    "name": "बीबीसी हिन्दी",
+    "country": "IN",
+    "language": "hi",
+    "feedUrl": "https://feeds.bbci.co.uk/hindi/rss.xml",
+    "homeUrl": "https://www.bbc.com/hindi",
+    "categoryHint": "top"
+  },
+  {
+    "id": "nbt-top-hi",
+    "name": "नवभारत टाइम्स",
+    "country": "IN",
+    "language": "hi",
+    "feedUrl": "https://navbharattimes.indiatimes.com/rssfeedstopstories.cms",
+    "homeUrl": "https://navbharattimes.indiatimes.com",
+    "categoryHint": "top"
+  },
+  {
+    "id": "amarujala-national-hi",
+    "name": "अमर उजाला",
+    "country": "IN",
+    "language": "hi",
+    "feedUrl": "https://www.amarujala.com/rss/national-news.xml",
+    "homeUrl": "https://www.amarujala.com",
+    "categoryHint": "politics"
+  },
+  {
+    "id": "aajtak-top-hi",
+    "name": "आज तक",
+    "country": "IN",
+    "language": "hi",
+    "feedUrl": "https://feed.aajtak.in/rss/feed/category/top-news",
+    "homeUrl": "https://www.aajtak.in",
+    "categoryHint": "top"
+  }
+]

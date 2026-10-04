@@ -1,0 +1,6 @@
+{
+  "name": "Awaaz News",
+  "description": "A calm, visual, listenable news discovery experience. Current stories from official RSS feeds narrated in English and Hindi with an animated Story Player.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
