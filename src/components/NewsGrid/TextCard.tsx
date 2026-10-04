@@ -7,6 +7,7 @@ import { formatTimeAgo } from '../../utils/timeAgo';
 import { usePrefs } from '../../context/PrefsContext';
 import { t } from '../../i18n/useI18n';
 import categoriesData from '../../config/categories.json';
+import { hasCachedVideoMatch } from '../../services/videoMatcher';
 import type { Article, CategoryInfo } from '../../types';
 
 const categories: CategoryInfo[] = categoriesData as CategoryInfo[];
@@ -40,15 +41,23 @@ export const TextCard: React.FC<TextCardProps> = ({ article, onClick }) => {
       <div>
         {/* Category & Badge */}
         <div className="flex items-center justify-between gap-2 mb-3">
-          <span
-            className="text-[11px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-md"
-            style={{
-              backgroundColor: `${categoryInfo.color}20`,
-              color: categoryInfo.color
-            }}
-          >
-            {categoryLabel}
-          </span>
+          <div className="flex items-center gap-2">
+            <span
+              className="text-[11px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-md"
+              style={{
+                backgroundColor: `${categoryInfo.color}20`,
+                color: categoryInfo.color
+              }}
+            >
+              {categoryLabel}
+            </span>
+            {hasCachedVideoMatch(article) && (
+              <span className="text-[10px] text-[#FF6B35] font-medium bg-[#FF6B35]/10 border border-[#FF6B35]/20 px-1.5 py-0.5 rounded-md flex items-center gap-1">
+                <span>▶</span>
+                <span>Video Available</span>
+              </span>
+            )}
+          </div>
           <span className="text-[10px] text-[#6C7A89] [data-theme=light]:text-stone-400 font-mono">
             {t(lang, 'card.textCardBadge')}
           </span>

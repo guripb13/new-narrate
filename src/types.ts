@@ -31,6 +31,8 @@ export interface ArticleImage {
   url: string;
   width: number;
   height: number;
+  sourceTitle?: string;
+  isRealNewsPhoto?: boolean;
 }
 
 export interface Article {
@@ -49,6 +51,8 @@ export interface Article {
   cities: string[];
   image: ArticleImage | null;
   publishedAt: string;
+  previewGifUrl?: string; // Looping video preview for hover if accuracy >= 90%
+  videoAccuracy?: number; // e.g. 0.95
 }
 
 export interface CategoryInfo {
@@ -71,8 +75,21 @@ export interface CityInfo {
   aliases: string[];
 }
 
-export interface VideoMatch {
+export interface VideoOption {
   youtubeId: string;
+  embedUrl: string;
+  previewUrl?: string; // Looping muted 6s preview
+  thumbnailUrl?: string; // High-res broadcast image
   title: string;
   channel: string;
+  accuracy?: number; // 0.0 to 1.0
+  confidencePercent?: number; // 0 to 100
+  isHighlyAccurate?: boolean; // true if >= 90%
+}
+
+export interface VideoMatch {
+  options: VideoOption[];
+  primary: VideoOption;
+  bestAccuracy?: number;
+  hasHighlyAccuratePreview?: boolean;
 }

@@ -7,7 +7,7 @@ import sourcesData from '../config/sources.json';
 import { cleanText } from './textClean';
 import { classifyArticle } from './classifier';
 import { isDuplicateArticle } from './dedupe';
-import { findMatchingVideo } from './videoMatcher';
+import { findMatchingVideo, getVerifiedVideosForArticle } from './videoMatcher';
 import type { Article, Language, Source, VideoMatch } from '../types';
 
 const sources: Source[] = sourcesData as Source[];
@@ -727,8 +727,39 @@ class NewsService {
     return this.articles.find(a => a.id === id) || null;
   }
 
+  public async getVerifiedVideoForArticle(article: Article): Promise<VideoMatch | null> {
+    return getVerifiedVideosForArticle(article);
+  }
+
   public getVideoForArticle(article: Article): VideoMatch | null {
-    return findMatchingVideo(article.title, article.language);
+    return findMatchingVideo(article.title, article.language, article.category);
+  }
+
+  public async searchInternetNews(query: string, language: Language = 'en'): Promise<Article[]> {
+    if (!query || !query.trim()) return [];
+
+    try {
+      const res = await fetch(
+        `/api/search-web-news?query=${encodeURIComponent(query.trim())}&lang=${language}&limit=25`,
+        { signal: AbortSignal.timeout(8000) }
+      );
+
+      if (!res.ok) return [];
+
+      const data = await res.json();
+      const fetched: Article[] = data.articles || [];
+
+      // Ingest and register newly discovered internet articles into newsService storage
+      for (const item of fetched) {
+        if (!isDuplicateArticle(item, this.articles)) {
+          this.articles.unshift(item);
+        }
+      }
+
+      return fetched;
+    } catch {
+      return [];
+    }
   }
 
   public getLastFetchedTime(): number {

@@ -12,6 +12,8 @@ import type { Article, Language } from '../../types';
 interface HeaderProps {
   searchQuery: string;
   onSearchChange: (q: string) => void;
+  onExecuteSearch?: (q: string) => void;
+  isSearchingWeb?: boolean;
   onOpenSettings: () => void;
   articles: Article[];
 }
@@ -19,6 +21,8 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({
   searchQuery,
   onSearchChange,
+  onExecuteSearch,
+  isSearchingWeb = false,
   onOpenSettings,
   articles
 }) => {
@@ -76,29 +80,66 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        {/* Center Search Input */}
-        <div className="relative w-full md:max-w-md">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#6C7A89]">
-            <SearchIcon className="w-4 h-4" />
+        {/* Center Search Input & Workable Web Search Button */}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (onExecuteSearch) onExecuteSearch(searchQuery);
+          }}
+          className="relative w-full md:max-w-lg flex items-center gap-1.5"
+        >
+          <div className="relative flex-1">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#6C7A89]">
+              {isSearchingWeb ? (
+                <div className="w-3.5 h-3.5 border-2 border-[#FF6B35] border-t-transparent rounded-full animate-spin" />
+              ) : (
+                <SearchIcon className="w-4 h-4" />
+              )}
+            </div>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => onSearchChange(e.target.value)}
+              placeholder={lang === 'hi' ? 'इंटरनेट पर कोई भी खबर खोजें...' : 'Search any topic across the internet...'}
+              maxLength={80}
+              className="w-full pl-9 pr-7 py-2 text-xs sm:text-sm rounded-xl bg-white/[0.04] [data-theme=light]:bg-stone-100/90 border border-white/[0.08] [data-theme=light]:border-black/[0.1] text-[#E8ECF1] [data-theme=light]:text-stone-900 placeholder-[#6C7A89] focus:outline-none focus:border-[#FF6B35]/50 focus:ring-1 focus:ring-[#FF6B35]/30 transition-all"
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => onSearchChange('')}
+                className="absolute inset-y-0 right-0 pr-2.5 flex items-center text-xs text-[#6C7A89] hover:text-[#E8ECF1]"
+                aria-label="Clear search"
+              >
+                ✕
+              </button>
+            )}
           </div>
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => onSearchChange(e.target.value)}
-            placeholder={t(lang, 'nav.searchPlaceholder')}
-            maxLength={80}
-            className="w-full pl-9 pr-4 py-1.5 text-xs sm:text-sm rounded-xl bg-white/[0.04] [data-theme=light]:bg-stone-100/80 border border-white/[0.08] [data-theme=light]:border-black/[0.08] text-[#E8ECF1] [data-theme=light]:text-stone-900 placeholder-[#6C7A89] focus:outline-none focus:border-[#FF6B35]/50 focus:ring-1 focus:ring-[#FF6B35]/30 transition-all"
-          />
-          {searchQuery && (
-            <button
-              onClick={() => onSearchChange('')}
-              className="absolute inset-y-0 right-0 pr-3 flex items-center text-xs text-[#6C7A89] hover:text-[#E8ECF1]"
-              aria-label="Clear search"
-            >
-              ✕
-            </button>
-          )}
-        </div>
+
+          {/* Workable Dedicated Search Button */}
+          <button
+            type="submit"
+            disabled={isSearchingWeb || !searchQuery.trim()}
+            className={`px-3 sm:px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 shrink-0 transition-all ${
+              searchQuery.trim()
+                ? 'bg-[#FF6B35] text-white hover:bg-[#FA581D] shadow-xs active:scale-95 cursor-pointer'
+                : 'bg-white/[0.05] [data-theme=light]:bg-black/[0.05] text-[#6C7A89] cursor-not-allowed opacity-60'
+            }`}
+            title="Search the live internet for news"
+          >
+            {isSearchingWeb ? (
+              <>
+                <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                <span className="hidden sm:inline">Searching...</span>
+              </>
+            ) : (
+              <>
+                <span>🌐</span>
+                <span className="font-medium">{lang === 'hi' ? 'खोजें' : 'Search Web'}</span>
+              </>
+            )}
+          </button>
+        </form>
 
         {/* Right Desktop Controls */}
         <div className="hidden md:flex items-center gap-2.5">

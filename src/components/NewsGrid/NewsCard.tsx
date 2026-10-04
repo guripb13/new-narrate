@@ -8,6 +8,7 @@ import { usePrefs } from '../../context/PrefsContext';
 import { t } from '../../i18n/useI18n';
 import { TextCard } from './TextCard';
 import categoriesData from '../../config/categories.json';
+import { hasCachedVideoMatch } from '../../services/videoMatcher';
 import type { Article, CategoryInfo } from '../../types';
 
 const categories: CategoryInfo[] = categoriesData as CategoryInfo[];
@@ -62,7 +63,7 @@ export const NewsCard: React.FC<NewsCardProps> = ({ article, onClick }) => {
       {/* Body Content */}
       <div className="p-4 flex-1 flex flex-col justify-between">
         <div>
-          {/* Category Chip */}
+          {/* Category Chip & Per-cell Video Availability */}
           <div className="flex items-center gap-2 mb-2">
             <span
               className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-md"
@@ -76,6 +77,12 @@ export const NewsCard: React.FC<NewsCardProps> = ({ article, onClick }) => {
             {article.cities.length > 0 && (
               <span className="text-[10px] text-[#9AA6B2] [data-theme=light]:text-stone-500 bg-white/[0.04] [data-theme=light]:bg-black/[0.04] px-1.5 py-0.5 rounded">
                 {article.cities[0]}
+              </span>
+            )}
+            {hasCachedVideoMatch(article) && (
+              <span className="text-[10px] text-[#FF6B35] font-medium bg-[#FF6B35]/10 border border-[#FF6B35]/20 px-1.5 py-0.5 rounded-md ml-auto flex items-center gap-1">
+                <span>▶</span>
+                <span>Video Available</span>
               </span>
             )}
           </div>

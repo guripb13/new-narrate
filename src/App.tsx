@@ -1,6 +1,7 @@
 /**
  * Awaaz News — Main Application
- * Integrates Onboarding, Responsive Masonry Grid, Header, and Story Player.
+ * Integrates Onboarding, Responsive Masonry Grid, Header, Story Player,
+ * and Real-Time Live Internet Search for any query or topic.
  */
 import React, { useState, useEffect, useTransition, useCallback } from 'react';
 import { PrefsProvider, usePrefs } from './context/PrefsContext';
@@ -23,6 +24,7 @@ function MainApp() {
   const [activeCategory, setActiveCategory] = useState<string>('for_you');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [debouncedQuery, setDebouncedQuery] = useState<string>('');
+  const [isSearchingWeb, setIsSearchingWeb] = useState<boolean>(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
   const [isOffline, setIsOffline] = useState<boolean>(!navigator.onLine);
 
@@ -34,11 +36,11 @@ function MainApp() {
 
   const [, startTransition] = useTransition();
 
-  // Debounce search query by 400ms (Section P6 Phase 4)
+  // Debounce search query by 450ms
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedQuery(searchQuery);
-    }, 400);
+    }, 450);
     return () => clearTimeout(timer);
   }, [searchQuery]);
 
@@ -54,7 +56,7 @@ function MainApp() {
     };
   }, []);
 
-  // Fetch articles query handler
+  // Fetch articles query handler with Live Internet Search integration
   const loadArticles = useCallback((cursor: string | null = null, append: boolean = false) => {
     setIsLoading(true);
 
@@ -62,14 +64,48 @@ function MainApp() {
     const targetCategories = isForYou ? preferences.categories : undefined;
     const targetCategory = isForYou ? undefined : activeCategory;
     const targetCity = isForYou ? preferences.city : undefined;
-    const targetQuery = debouncedQuery || (isForYou ? preferences.query : undefined);
+    const trimmedQuery = debouncedQuery.trim();
+
+    // If search query is active and not paginating, perform real-time internet search
+    if (trimmedQuery.length >= 2 && !cursor && !append) {
+      setIsSearchingWeb(true);
+      newsService.searchInternetNews(trimmedQuery, preferences.language).then((webResults) => {
+        setIsSearchingWeb(false);
+        if (webResults && webResults.length > 0) {
+          startTransition(() => {
+            setArticles(webResults);
+            setNextCursor(null);
+            setIsRelaxed(false);
+            setIsLoading(false);
+          });
+          return;
+        }
+
+        // Fallback to local search if web returned 0
+        const res = newsService.queryNews({
+          language: preferences.language,
+          query: trimmedQuery,
+          limit: 24
+        });
+        startTransition(() => {
+          setArticles(res.items);
+          setNextCursor(res.nextCursor);
+          setIsRelaxed(res.relaxed);
+          setIsLoading(false);
+        });
+      }).catch(() => {
+        setIsSearchingWeb(false);
+        setIsLoading(false);
+      });
+      return;
+    }
 
     const res = newsService.queryNews({
       language: preferences.language,
       category: targetCategory,
       categories: targetCategories,
       city: targetCity,
-      query: targetQuery,
+      query: trimmedQuery || (isForYou ? preferences.query : undefined),
       cursor,
       limit: 24
     });
@@ -87,7 +123,43 @@ function MainApp() {
     loadArticles(null, false);
   }, [loadArticles]);
 
-  // Check background feed updates periodically (Section A2)
+  // Explicit immediate web search execution (triggered when user clicks Search Web or presses Enter)
+  const handleExecuteSearch = useCallback(async (q: string) => {
+    const trimmed = q.trim();
+    if (!trimmed) return;
+
+    setDebouncedQuery(trimmed);
+    setIsSearchingWeb(true);
+    setIsLoading(true);
+
+    try {
+      const webResults = await newsService.searchInternetNews(trimmed, preferences.language);
+      setIsSearchingWeb(false);
+      if (webResults && webResults.length > 0) {
+        startTransition(() => {
+          setArticles(webResults);
+          setNextCursor(null);
+          setIsRelaxed(false);
+          setIsLoading(false);
+        });
+      } else {
+        const res = newsService.queryNews({
+          language: preferences.language,
+          query: trimmed,
+          limit: 24
+        });
+        startTransition(() => {
+          setArticles(res.items);
+          setIsLoading(false);
+        });
+      }
+    } catch {
+      setIsSearchingWeb(false);
+      setIsLoading(false);
+    }
+  }, [preferences.language]);
+
+  // Check background feed updates periodically (every 3 minutes)
   useEffect(() => {
     const interval = setInterval(async () => {
       const added = await newsService.refreshFeeds();
@@ -102,6 +174,12 @@ function MainApp() {
     setNewStoriesCount(0);
     loadArticles(null, false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleClearSearch = () => {
+    setSearchQuery('');
+    setDebouncedQuery('');
+    setActiveCategory('for_you');
   };
 
   return (
@@ -129,10 +207,12 @@ function MainApp() {
         )}
       </div>
 
-      {/* Navigation Header */}
+      {/* Navigation Header with Workable Web Search Button */}
       <Header
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
+        onExecuteSearch={handleExecuteSearch}
+        isSearchingWeb={isSearchingWeb}
         onOpenSettings={() => setIsSettingsOpen(true)}
         articles={articles}
       />
@@ -146,6 +226,51 @@ function MainApp() {
         }}
         isRelaxed={isRelaxed}
       />
+
+      {/* Live Internet Search Status Header */}
+      {debouncedQuery.trim() && (
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-4">
+          <div className="p-4 sm:p-5 rounded-2xl bg-[#171C24] [data-theme=light]:bg-white border border-[#FF6B35]/30 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-[#FF6B35]/15 text-[#FF6B35] flex items-center justify-center shrink-0 text-xl border border-[#FF6B35]/25">
+                {isSearchingWeb ? (
+                  <div className="w-5 h-5 border-2 border-[#FF6B35] border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  '🌐'
+                )}
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs uppercase tracking-wider font-semibold text-[#FF6B35]">
+                    {isSearchingWeb ? 'Searching Live Internet...' : 'Live Web News'}
+                  </span>
+                  <span className="text-[10px] bg-emerald-500/15 text-emerald-400 border border-emerald-500/25 px-2 py-0.5 rounded-full font-mono font-medium">
+                    ● Real-Time Web Wire
+                  </span>
+                </div>
+                <h2 className="text-base sm:text-lg font-bold text-[#E8ECF1] [data-theme=light]:text-stone-900 leading-tight mt-0.5">
+                  Results for &ldquo;{debouncedQuery}&rdquo;
+                </h2>
+                <p className="text-xs text-[#9AA6B2] [data-theme=light]:text-stone-600 mt-0.5">
+                  {isSearchingWeb
+                    ? 'Querying global publishers, Google News & live news networks...'
+                    : `Discovered ${articles.length} news stories directly from the internet.`}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 self-start sm:self-center">
+              <button
+                type="button"
+                onClick={handleClearSearch}
+                className="px-3.5 py-1.5 rounded-xl text-xs font-medium bg-white/[0.08] [data-theme=light]:bg-black/[0.05] hover:bg-white/[0.12] [data-theme=light]:hover:bg-black/[0.1] text-[#E8ECF1] [data-theme=light]:text-stone-700 transition-colors"
+              >
+                ✕ Clear Search
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Responsive Masonry News Grid */}
       <main>
@@ -162,11 +287,7 @@ function MainApp() {
               loadArticles(nextCursor, true);
             }
           }}
-          onClearSearch={() => {
-            setSearchQuery('');
-            setDebouncedQuery('');
-            setActiveCategory('for_you');
-          }}
+          onClearSearch={handleClearSearch}
           onOpenSettings={() => setIsSettingsOpen(true)}
         />
       </main>
