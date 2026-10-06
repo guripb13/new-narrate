@@ -71,10 +71,13 @@ export const NewsGrid: React.FC<NewsGridProps> = ({
     };
   }, [hasMore, isLoading, onLoadMore]);
 
-  // Distribute articles into masonry columns
-  const columns: Article[][] = Array.from({ length: columnCount }, () => []);
+  // Distribute articles into masonry columns while preserving their original feed index
+  const columns: Array<Array<{ article: Article; index: number }>> = Array.from(
+    { length: columnCount },
+    () => []
+  );
   articles.forEach((article, index) => {
-    columns[index % columnCount].push(article);
+    columns[index % columnCount].push({ article, index });
   });
 
   // Empty State
@@ -114,10 +117,11 @@ export const NewsGrid: React.FC<NewsGridProps> = ({
       <div className="flex gap-4 items-start">
         {columns.map((colArticles, colIdx) => (
           <div key={colIdx} className="flex-1 flex flex-col min-w-0">
-            {colArticles.map((article) => (
+            {colArticles.map(({ article, index }) => (
               <NewsCard
                 key={article.id}
                 article={article}
+                index={index}
                 onClick={() => openStory(article, articles)}
               />
             ))}

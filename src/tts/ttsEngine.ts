@@ -8,6 +8,7 @@ import type { Language } from '../types';
 export interface TTSOptions {
   rate?: number;
   onSentenceStart?: (index: number) => void;
+  onWordBoundary?: (sentenceIndex: number, charIndex: number, wordIndex: number) => void;
   onEnd?: () => void;
   onError?: (err: any) => void;
 }
@@ -81,6 +82,14 @@ class TTSEngine {
     utterance.pitch = 1.0;
     utterance.volume = 1.0;
 
+    utterance.onboundary = (e) => {
+      if (e.name === 'word' || typeof e.charIndex === 'number') {
+        const textUpToChar = textChunk.slice(0, e.charIndex);
+        const wordIndex = textUpToChar.trim().split(/\s+/).filter(Boolean).length;
+        this.options.onWordBoundary?.(this.currentIndex, e.charIndex, wordIndex);
+      }
+    };
+
     utterance.onend = () => {
       if (this.isSpeaking && !this.isPaused) {
         this.currentIndex++;
@@ -96,6 +105,21 @@ class TTSEngine {
     };
 
     window.speechSynthesis.speak(utterance);
+  }
+
+  public seekToSentence(targetIndex: number): void {
+    if (!this.isSupported() || this.currentSentences.length === 0) return;
+    const clampedIndex = Math.max(0, Math.min(this.currentSentences.length - 1, targetIndex));
+
+    window.speechSynthesis.cancel();
+    this.currentIndex = clampedIndex;
+    this.isSpeaking = true;
+    this.isPaused = false;
+
+    loadVoices().then((voices) => {
+      const voice = selectBestVoice(voices, this.currentLanguage);
+      this.playNextChunk(voice);
+    });
   }
 
   public pause(): void {

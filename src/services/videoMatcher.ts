@@ -70,7 +70,17 @@ export async function getVerifiedVideosForArticle(article: Article): Promise<Vid
       }
 
       const data = await res.json();
-      const rawVideos: Array<{ youtubeId: string; title: string; channel: string; relevanceScore: number }> = data.videos || [];
+      const rawVideos: Array<{
+        youtubeId: string;
+        title: string;
+        channel: string;
+        relevanceScore: number;
+        accuracy?: number;
+        confidencePercent?: number;
+        isHighlyAccurate?: boolean;
+        previewSnippetUrl?: string;
+        thumbnailUrl?: string;
+      }> = data.videos || [];
 
       // Double-verify relevance
       const relevantVideos = rawVideos.filter(v => verifyClientRelevance(headline, v.title));
@@ -82,16 +92,32 @@ export async function getVerifiedVideosForArticle(article: Article): Promise<Vid
         return null;
       }
 
-      const options: VideoOption[] = relevantVideos.slice(0, 3).map(v => ({
-        youtubeId: v.youtubeId,
-        embedUrl: `https://www.youtube-nocookie.com/embed/${v.youtubeId}?autoplay=0&rel=0&modestbranding=1&controls=1`,
-        title: v.title,
-        channel: v.channel
-      }));
+      const options: VideoOption[] = relevantVideos.slice(0, 3).map(v => {
+        const accuracy = v.accuracy ?? 0.85;
+        const confidencePercent = v.confidencePercent ?? Math.round(accuracy * 100);
+        const isHighlyAccurate = v.isHighlyAccurate ?? (confidencePercent >= 90);
+
+        return {
+          youtubeId: v.youtubeId,
+          embedUrl: `https://www.youtube-nocookie.com/embed/${v.youtubeId}?autoplay=0&rel=0&modestbranding=1&controls=1`,
+          previewUrl: v.previewSnippetUrl || `https://www.youtube-nocookie.com/embed/${v.youtubeId}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=${v.youtubeId}&start=4&end=11&playsinline=1&modestbranding=1&disablekb=1&fs=0&iv_load_policy=3&cc_load_policy=0&autohide=1`,
+          thumbnailUrl: v.thumbnailUrl || `https://i.ytimg.com/vi/${v.youtubeId}/hqdefault.jpg`,
+          title: v.title,
+          channel: v.channel,
+          accuracy,
+          confidencePercent,
+          isHighlyAccurate
+        };
+      });
+
+      const bestAccuracy = options[0]?.accuracy || 0;
+      const hasHighlyAccuratePreview = Boolean(options[0]?.isHighlyAccurate);
 
       const match: VideoMatch = {
         options,
-        primary: options[0]
+        primary: options[0],
+        bestAccuracy,
+        hasHighlyAccuratePreview
       };
 
       articleMatchCache.set(cacheKey, match);
@@ -106,6 +132,46 @@ export async function getVerifiedVideosForArticle(article: Article): Promise<Vid
 
   pendingRequests.set(cacheKey, promise);
   return promise;
+}
+
+/**
+ * Super smart accurate image discovery model:
+ * Searches across broadcast journalism and the internet to find the actual news photograph.
+ */
+const realImageCache = new Map<string, { imageUrl: string; sourceTitle?: string; isRealNewsPhoto: boolean; isHighlyAccurate: boolean; previewGifUrl?: string } | null>();
+
+export async function findActualNewsImage(article: Article): Promise<{ imageUrl: string; sourceTitle?: string; previewGifUrl?: string; isHighlyAccurate: boolean } | null> {
+  const cacheKey = `img:${article.id}:${article.title.trim().toLowerCase()}`;
+  if (realImageCache.has(cacheKey)) {
+    return realImageCache.get(cacheKey) || null;
+  }
+
+  try {
+    const res = await fetch(`/api/find-news-image?headline=${encodeURIComponent(article.title)}`, {
+      signal: AbortSignal.timeout(6000)
+    });
+    if (!res.ok) {
+      realImageCache.set(cacheKey, null);
+      return null;
+    }
+    const data = await res.json();
+    if (data.imageUrl) {
+      const result = {
+        imageUrl: data.imageUrl,
+        sourceTitle: data.sourceTitle,
+        isRealNewsPhoto: true,
+        isHighlyAccurate: Boolean(data.isHighlyAccurate),
+        previewGifUrl: data.previewGifUrl
+      };
+      realImageCache.set(cacheKey, result);
+      return result;
+    }
+    realImageCache.set(cacheKey, null);
+    return null;
+  } catch {
+    realImageCache.set(cacheKey, null);
+    return null;
+  }
 }
 
 /**

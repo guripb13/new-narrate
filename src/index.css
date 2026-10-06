@@ -69,6 +69,41 @@ body {
   background: rgba(0, 0, 0, 0.15);
 }
 
+/* Buttery Smooth Custom Scrollbar for Transcript and Lists */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 107, 53, 0.35) transparent;
+  scroll-behavior: smooth;
+}
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 107, 53, 0.35);
+  border-radius: 9999px;
+  transition: background 0.2s ease;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 107, 53, 0.8);
+}
+[data-theme="light"] .custom-scrollbar {
+  scrollbar-color: rgba(230, 81, 0, 0.35) transparent;
+}
+[data-theme="light"] .custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.04);
+}
+[data-theme="light"] .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(230, 81, 0, 0.35);
+}
+[data-theme="light"] .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(230, 81, 0, 0.8);
+}
+
 /* Ken Burns slow continuous zoom animation (14s) */
 @keyframes kenburns {
   0% {
@@ -99,3 +134,79 @@ body {
 .wave-bar-2 { animation: soundwave 1.2s ease-in-out 0.2s infinite; }
 .wave-bar-3 { animation: soundwave 1.2s ease-in-out 0.4s infinite; }
 .wave-bar-4 { animation: soundwave 1.2s ease-in-out 0.1s infinite; }
+
+/* Fluid Cinematic Cell Opening Transition */
+@keyframes cellModalOpen {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes cellModalClose {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.94) translateY(16px);
+  }
+}
+
+@keyframes backdropFadeIn {
+  0% {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    backdrop-filter: blur(12px);
+  }
+}
+
+@keyframes backdropFadeOut {
+  0% {
+    opacity: 1;
+    backdrop-filter: blur(12px);
+  }
+  100% {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+}
+
+@keyframes contentSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-cell-open {
+  animation: cellModalOpen 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-cell-close {
+  animation: cellModalClose 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-backdrop-in {
+  animation: backdropFadeIn 0.3s ease-out forwards;
+}
+
+.animate-backdrop-out {
+  animation: backdropFadeOut 0.2s ease-in forwards;
+}
+
+.animate-content-slide {
+  animation: contentSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

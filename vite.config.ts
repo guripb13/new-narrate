@@ -125,7 +125,17 @@ function rssProxyPlugin() {
               .filter(t => t.length >= 3 && !STOP_WORDS.has(t));
 
             const headlineTokens = getTokens(headline);
-            const verifiedMatches: Array<{ youtubeId: string; title: string; channel: string; relevanceScore: number }> = [];
+            const verifiedMatches: Array<{
+              youtubeId: string;
+              title: string;
+              channel: string;
+              relevanceScore: number;
+              accuracy: number;
+              confidencePercent: number;
+              isHighlyAccurate: boolean;
+              previewSnippetUrl: string;
+              thumbnailUrl: string;
+            }> = [];
 
             await Promise.all(
               candidateIds.map(async (vId) => {
@@ -160,8 +170,8 @@ function rssProxyPlugin() {
                       const confidencePercent = Math.round(accuracy * 100);
                       const isHighlyAccurate = confidencePercent >= 90;
 
-                      // Looping 7-second muted video snippet for cell hover preview
-                      const previewSnippetUrl = `https://www.youtube-nocookie.com/embed/${vId}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=${vId}&start=4&end=11&playsinline=1&modestbranding=1`;
+                      // Looping 7-second muted video snippet for cell hover preview (no controls, no branding, no info)
+                      const previewSnippetUrl = `https://www.youtube-nocookie.com/embed/${vId}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=${vId}&start=4&end=11&playsinline=1&modestbranding=1&disablekb=1&fs=0&iv_load_policy=3&cc_load_policy=0&autohide=1`;
                       const thumbnailUrl = `https://i.ytimg.com/vi/${vId}/hqdefault.jpg`;
 
                       verifiedMatches.push({
@@ -255,7 +265,7 @@ function rssProxyPlugin() {
                     accuracy = matched.length / hWords.length;
                     if (accuracy >= 0.85 || matched.length >= 3) {
                       isHighlyAccurate = true;
-                      previewGifUrl = `https://www.youtube-nocookie.com/embed/${vId}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=${vId}&start=4&end=11&playsinline=1&modestbranding=1`;
+                      previewGifUrl = `https://www.youtube-nocookie.com/embed/${vId}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=${vId}&start=4&end=11&playsinline=1&modestbranding=1&disablekb=1&fs=0&iv_load_policy=3&cc_load_policy=0&autohide=1`;
                     }
                     break;
                   }

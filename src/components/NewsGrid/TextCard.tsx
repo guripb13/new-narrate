@@ -30,7 +30,7 @@ export const TextCard: React.FC<TextCardProps> = ({ article, onClick }) => {
       role="button"
       tabIndex={0}
       aria-label={t(lang, 'card.openStory', { headline: article.title })}
-      className="group w-full text-left rounded-2xl p-5 mb-4 border border-white/[0.07] [data-theme=light]:border-black/[0.08] bg-[#171C24] [data-theme=light]:bg-white shadow-xs hover:shadow-md transition-all duration-200 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-[#FF6B35]/50 flex flex-col justify-between relative overflow-hidden"
+      className="group w-full text-left rounded-2xl p-5 mb-4 border border-white/[0.07] [data-theme=light]:border-black/[0.08] bg-[#171C24] [data-theme=light]:bg-white shadow-xs hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 active:scale-[0.98] active:ring-2 active:ring-[#FF6B35]/40 focus:outline-none focus:ring-2 focus:ring-[#FF6B35]/50 flex flex-col justify-between relative overflow-hidden cursor-pointer will-change-transform"
     >
       {/* Subtle Deterministic Background Gradient Glow */}
       <div
